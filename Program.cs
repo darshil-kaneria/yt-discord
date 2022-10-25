@@ -19,7 +19,6 @@ namespace HttpListenerExample
         public static string url = "http://localhost:6361/";
         public static long currentElapsed = 0;
         public static string currentSong = "";
-        // public static long CLIENT_ID = 1034297846100394056;
         public static string CLIENT_ID_ENV = Environment.GetEnvironmentVariable("YT_CLIENT_ID");
         public static long CLIENT_ID = 0;
         public static Discord.Discord discord;
