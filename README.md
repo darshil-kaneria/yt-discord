@@ -1,5 +1,5 @@
 # yt-discord
-Unofficial Youtube Music integration for Discord. Contains an extension and a mini C# server which doubles as a Discord SDK client.
+Youtube Music integration for Discord. Contains an extension and a mini C# server which doubles as a Discord SDK client.
 
 ## Setup Discord client
 The extension desktop client is written in C# and is essentially a server which listens to events from the extension. The client updates user presence on discord with the appropriate status.
