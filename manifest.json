@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Youtube Music",
+    "version": "1.0",
+    "description": "Discord integration for Youtube Music",
+    "icons": {
+        "64": "app-icons/1034297846100394056/icon.png"
+    },
+    "permissions": ["tabs", "http://localhost:6361/*", "*://localhost/*"],
+    "content_scripts": 
+          [
+              {
+              "matches": ["https://music.youtube.com/*"],
+              "js": ["ytext.js"]
+              }
+          ]
+  }

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "NVVel5ma6cGRkklfAWxepp+gl6gfq08/zumsgkLdmZAdjK7mK7jZlS0uKZSBPH74wyA8OJpfSDX9bwzDHzxpGg==",
+  "success": true,
+  "projectFilePath": "/home/periodicdev/ytext/ytext.csproj",
+  "expectedPackageFiles": [
+    "/home/periodicdev/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/6.0.10/microsoft.netcore.app.runtime.linux-x64.6.0.10.nupkg.sha512",
+    "/home/periodicdev/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/6.0.10/microsoft.aspnetcore.app.runtime.linux-x64.6.0.10.nupkg.sha512",
+    "/home/periodicdev/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.10/microsoft.netcore.app.host.linux-x64.6.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}
