@@ -1,12 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NVVel5ma6cGRkklfAWxepp+gl6gfq08/zumsgkLdmZAdjK7mK7jZlS0uKZSBPH74wyA8OJpfSDX9bwzDHzxpGg==",
+  "dgSpecHash": "XFX6i1vP13Y0DfNgUiMBrZH/fV9SZyPXUp6HYoIaJVLMbl6IVGlOq1oaPOAxK6w8rGvy9TasZ4bmwE1KzrEVFQ==",
   "success": true,
-  "projectFilePath": "/home/periodicdev/ytext/ytext.csproj",
+  "projectFilePath": "/home/dkaneria/workspace/yt-discord/ytext.csproj",
   "expectedPackageFiles": [
-    "/home/periodicdev/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/6.0.10/microsoft.netcore.app.runtime.linux-x64.6.0.10.nupkg.sha512",
-    "/home/periodicdev/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/6.0.10/microsoft.aspnetcore.app.runtime.linux-x64.6.0.10.nupkg.sha512",
-    "/home/periodicdev/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.10/microsoft.netcore.app.host.linux-x64.6.0.10.nupkg.sha512"
+    "/home/dkaneria/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.27/microsoft.netcore.app.host.linux-x64.6.0.27.nupkg.sha512"
   ],
   "logs": []
 }

@@ -18,6 +18,7 @@ namespace HttpListenerExample
         public static HttpListener listener;
         public static string url = "http://localhost:6361/";
         public static long currentElapsed = 0;
+        public static long totalTime = 0;
         public static string currentSong = "";
         public static string CLIENT_ID_ENV = Environment.GetEnvironmentVariable("YT_CLIENT_ID");
         public static long CLIENT_ID = 0;
@@ -44,9 +45,11 @@ namespace HttpListenerExample
                 Console.WriteLine(HttpUtility.UrlDecode(req.QueryString["name"]));
                 Console.WriteLine(HttpUtility.UrlDecode(req.QueryString["artist"]));
                 Console.WriteLine(HttpUtility.UrlDecode(req.QueryString["imgsrc"]));
+                Console.WriteLine(HttpUtility.UrlDecode(req.QueryString["tsc"]));
+                Console.WriteLine(HttpUtility.UrlDecode(req.QueryString["tst"]));
                 Console.WriteLine();
 
-                Update(req.QueryString["name"], req.QueryString["artist"], req.QueryString["imgsrc"]);
+                Update(req.QueryString["name"], req.QueryString["artist"], req.QueryString["imgsrc"], req.QueryString["tsc"], req.QueryString["tst"]);
                 resp.Close();
             }
         }
@@ -69,29 +72,31 @@ namespace HttpListenerExample
             discord = new Discord.Discord(CLIENT_ID, (UInt64)Discord.CreateFlags.Default);
             activityManager = discord.GetActivityManager();
             Task listenTask = HandleIncomingConnections();
-            Update("", "", "https://cdn.discordapp.com/app-icons/1034297846100394056/a8a318b62d368addd303cd2d140da09b.png");
+            Update("", "", "https://cdn.discordapp.com/app-icons/1034297846100394056/a8a318b62d368addd303cd2d140da09b.png", "", "");
             listenTask.GetAwaiter().GetResult();
 
             listener.Close();
         }
 
-        public static void Update(string songname, string artistname, string imagesrc)
+        public static void Update(string songname, string artistname, string imagesrc, string time_curr, string time_total)
         {
 
-            // Get the offset from current time in UTC time
-            DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);
-            // Get the unix timestamp in seconds
-            long unixTime = dto.ToUnixTimeSeconds();
+            // // Get the offset from current time in UTC time
+            // DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);
+            // // Get the unix timestamp in seconds
+            // long unixTime = dto.ToUnixTimeSeconds();
 
             if (currentSong == "")
             {
                 currentSong = songname;
-                currentElapsed = unixTime;
+                currentElapsed = 0;
+                totalTime = 0;
             }
             else if (songname != currentSong)
             {
                 currentSong = songname;
-                currentElapsed = unixTime;
+                currentElapsed = Int32.Parse(time_curr);
+                totalTime = Int32.Parse(time_total);
             }
 
             var activity = new Discord.Activity
@@ -101,7 +106,8 @@ namespace HttpListenerExample
                 Type = Discord.ActivityType.Listening,
                 Timestamps = 
                 {
-                    Start = currentElapsed
+                    Start = currentElapsed,
+                    End = totalTime
                 },
                 Assets =
                 {
