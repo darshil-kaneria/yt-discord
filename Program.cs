@@ -100,17 +100,12 @@ namespace HttpListenerExample
                 totalTime = ConvertTimeStringToSeconds(time_total) + unixTime;
                 Console.WriteLine(currentElapsed);
             }
-            if (time_curr != "") {
 
-            Console.WriteLine(ConvertTimeStringToSeconds(time_curr) + unixTime);
-            Console.WriteLine(unixTime + ConvertTimeStringToSeconds(time_curr));
-            }
-
-            if (time_curr != "" && unixTime + ConvertTimeStringToSeconds(time_curr) < currentElapsed) {
-                Console.WriteLine("Song rewinded");
-                currentElapsed = ConvertTimeStringToSeconds(time_curr) + unixTime;
-                totalTime = ConvertTimeStringToSeconds(time_total) + unixTime;
-            }
+            // if (time_curr != "" && unixTime + ConvertTimeStringToSeconds(time_curr) < currentElapsed) {
+            //     Console.WriteLine("Song rewinded");
+            //     currentElapsed = ConvertTimeStringToSeconds(time_curr) + unixTime;
+            //     totalTime = ConvertTimeStringToSeconds(time_total) + unixTime;
+            // }
 
 
 
