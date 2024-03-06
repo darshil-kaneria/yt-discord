@@ -49,7 +49,7 @@ namespace HttpListenerExample
                 Console.WriteLine(HttpUtility.UrlDecode(req.QueryString["tst"]));
                 Console.WriteLine();
 
-                Update(req.QueryString["name"], req.QueryString["artist"], req.QueryString["imgsrc"], req.QueryString["tsc"], req.QueryString["tst"]);
+                Update(req.QueryString["name"], req.QueryString["artist"], req.QueryString["imgsrc"], req.QueryString["tsc"] != null ? req.QueryString["tsc"].Trim() : null, req.QueryString["tst"] != null ? req.QueryString["tst"].Trim() : null);
                 resp.Close();
             }
         }
@@ -82,22 +82,37 @@ namespace HttpListenerExample
         {
 
             // // Get the offset from current time in UTC time
-            // DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);
+            DateTimeOffset dto = new DateTimeOffset(DateTime.UtcNow);
             // // Get the unix timestamp in seconds
-            // long unixTime = dto.ToUnixTimeSeconds();
-
+            long unixTime = dto.ToUnixTimeSeconds();
+            Console.WriteLine(songname);
+            Console.WriteLine(currentSong);
             if (currentSong == "")
             {
                 currentSong = songname;
-                currentElapsed = 0;
-                totalTime = 0;
+                currentElapsed = unixTime;
+                // totalTime = ConvertTimeStringToSeconds(time_total) + unixTime;
             }
             else if (songname != currentSong)
             {
                 currentSong = songname;
-                currentElapsed = Int32.Parse(time_curr);
-                totalTime = Int32.Parse(time_total);
+                currentElapsed = ConvertTimeStringToSeconds(time_curr) + unixTime;
+                totalTime = ConvertTimeStringToSeconds(time_total) + unixTime;
+                Console.WriteLine(currentElapsed);
             }
+            if (time_curr != "") {
+
+            Console.WriteLine(ConvertTimeStringToSeconds(time_curr) + unixTime);
+            Console.WriteLine(unixTime + ConvertTimeStringToSeconds(time_curr));
+            }
+
+            if (time_curr != "" && unixTime + ConvertTimeStringToSeconds(time_curr) < currentElapsed) {
+                Console.WriteLine("Song rewinded");
+                currentElapsed = ConvertTimeStringToSeconds(time_curr) + unixTime;
+                totalTime = ConvertTimeStringToSeconds(time_total) + unixTime;
+            }
+
+
 
             var activity = new Discord.Activity
             {
@@ -107,7 +122,7 @@ namespace HttpListenerExample
                 Timestamps = 
                 {
                     Start = currentElapsed,
-                    End = totalTime
+                    // End = totalTime
                 },
                 Assets =
                 {
@@ -130,6 +145,32 @@ namespace HttpListenerExample
             discord.RunCallbacks();
         }
 
+        public static int ConvertTimeStringToSeconds(string timeString)
+    {
+        string[] timeParts = timeString.Split(':');
+
+        if (timeParts.Length != 2)
+        {
+            // Handle invalid input format
+            throw new ArgumentException("Invalid time format. Use mm:ss");
+        }
+
+        int minutes, seconds;
+
+        if (int.TryParse(timeParts[0], out minutes) && int.TryParse(timeParts[1], out seconds))
+        {
+            // Calculate total seconds
+            return minutes * 60 + seconds;
+        }
+        else
+        {
+            // Handle invalid numeric values
+            throw new ArgumentException("Invalid numeric values in time string.");
+        }
+    }
+
 
     }
+
+    
 }
